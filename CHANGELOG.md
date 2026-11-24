@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.7.0](https://github.com/oharu121/skills/releases/tag/v1.7.0) - 2026-11-25
+
 ### Added
 
 - **Skills**
@@ -13,6 +15,24 @@ All notable changes to this project will be documented in this file.
     the favicon ships. Bundles `scripts/gallery.mjs` (contact sheet + local server, no
     dependencies) and `scripts/outline.py` (bakes real typeface outlines to SVG paths via
     fontTools + HarfBuzz, so a wordmark ships as geometry with no webfont request)
+
+### Fixed
+
+- **`aws-architecture-diagram`** — layout rules that following the skill literally used
+  to leave open ([#12](https://github.com/oharu121/skills/issues/12)):
+  - Lanes stack top to bottom, each header directly above its own row, separated by a
+    dashed horizontal divider whose style sets `endArrow=none;startArrow=none;`, so it no
+    longer renders an arrowhead
+  - An edge never leaves or enters an icon from the bottom, where the icon's label sits;
+    exit and entry sides are set explicitly
+  - An edge between rows routes through a gutter beside the lanes, and lane headers stop
+    short of it
+  - An edge label sits on a clear straight segment, positioned with the edge geometry's
+    `x`, instead of at the path midpoint
+  - Circled step numbers on edges are 14px bold
+  - Where Draw.io offers a service in two palettes, the colour follows AWS's own
+    Architecture Icons: API Gateway is Application Integration (`#E7157B`); its duplicate
+    Networking entry is removed
 
 ## [v1.6.0](https://github.com/oharu121/skills/releases/tag/v1.6.0) - 2026-04-19
 

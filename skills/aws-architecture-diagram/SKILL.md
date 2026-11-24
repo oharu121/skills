@@ -30,8 +30,8 @@ Read the relevant reference files to get exact shape names and colors:
 
 - `references/aws-icons-compute.md` — EC2, Lambda, ECS, EKS, Fargate, ELB
 - `references/aws-icons-storage-database.md` — S3, EBS, RDS, DynamoDB, Aurora, ElastiCache
-- `references/aws-icons-networking.md` — VPC, CloudFront, Route 53, API Gateway, Direct Connect
-- `references/aws-icons-app-integration.md` — SNS, SQS, EventBridge, Step Functions, CloudWatch, CloudFormation
+- `references/aws-icons-networking.md` — VPC, CloudFront, Route 53, Direct Connect
+- `references/aws-icons-app-integration.md` — API Gateway, SNS, SQS, EventBridge, Step Functions, CloudWatch, CloudFormation
 - `references/aws-icons-analytics-ml.md` — Athena, Glue, Kinesis, OpenSearch, Bedrock, SageMaker
 - `references/aws-icons-security.md` — IAM, Cognito, WAF, Shield, KMS, GuardDuty
 - `references/aws-icons-common.md` — Users, servers, internet, groups, arrows
@@ -110,12 +110,12 @@ Choose a **descriptive kebab-case slug** that best describes the diagram content
 1. **Always look up icons** in reference files before generating XML
 2. **Use `strokeColor=#ffffff`** for all resourceIcon patterns (service-level icons)
 3. **Use `strokeColor=none`** for all dedicated shapes (resource-level icons)
-4. **Match fillColor to category** — never mix colors across categories
+4. **Match fillColor to category** — never mix colors across categories. Where Draw.io offers a service in two palettes, use the category of AWS's own Architecture Icons: API Gateway is Application Integration (`#E7157B`), not Networking
 5. **Ask the user for language** (English or 日本語) — use consistently across diagram labels, titles, legend, and companion guide
 6. **No HTML in labels** — plain text only
 7. **Max 15-20 icons** per diagram for readability
 8. **Edge color**: `#545B64` (AWS default gray)
-9. **Font**: 12px for icon labels, 10px for edge labels
+9. **Font**: 12px for icon labels, 10px for edge labels, 14px bold for circled step numbers on edges
 10. **Icon size**: 48×48 for both service and resource icons
 11. **Single AWS Cloud group** — use one AWS Cloud group spanning the full diagram, not multiple
 12. **Full-coverage background** — add a light `#F5F5F5` rounded rect behind everything (title, lanes, legend) so PNG export has a clean background instead of black
@@ -138,7 +138,9 @@ Replace technical labels (HTTPS, REST API, etc.) with circled step numbers:
 ### Lane layout with flow summaries
 When a diagram has multiple flows (e.g., data processing + search), use swim lanes:
 - Add a step-by-step summary in each lane header: e.g., `"① チケット取得 → ② データ保存 → ③ AI変換 → ④ 索引化"`
-- Use a dashed vertical line to separate lanes instead of separate colored blocks
+- Stack the lanes top to bottom inside the single AWS Cloud group, each lane header directly above its own row of icons
+- Separate the lanes with a dashed horizontal line instead of separate colored blocks
+- Route an edge that crosses from one lane to another through a gutter beside the lanes, as `references/layout-guidelines.md` describes, so it never runs through an icon label
 - Place the legend outside colored lanes for visibility
 
 ### Background and legend

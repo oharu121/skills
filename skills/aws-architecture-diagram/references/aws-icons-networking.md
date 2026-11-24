@@ -10,7 +10,6 @@ Required: `fillColor=#8C4FFF;strokeColor=#ffffff`
 | Display Name | resIcon |
 |---|---|
 | Networking and Content Delivery | `networking_and_content_delivery` |
-| API Gateway | `api_gateway` |
 | App Mesh | `app_mesh` |
 | Client VPN | `client_vpn` |
 | Cloud Directory | `cloud_directory` |

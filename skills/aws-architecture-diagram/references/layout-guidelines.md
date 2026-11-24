@@ -12,6 +12,7 @@
 
 - **Icon labels**: 12px, fontColor=#232F3E
 - **Edge labels**: 10px
+- **Step-number edge labels** (① ❶ in Non-Technical mode): 14px bold (`fontSize=14;fontStyle=1;`), since they are what the reader follows
 - **Group labels**: 12px, bold (fontStyle=1)
 - **Label position**: Below icon (`verticalLabelPosition=bottom;verticalAlign=top;`)
 
@@ -42,6 +43,9 @@
 - Use `rounded=0` for clean corners
 - Label edges with data flow description when helpful
 - Edge label style: `fontSize=10;fontColor=#545B64;`
+- **Never let an edge leave or enter an icon from the bottom.** Icon labels sit below icons, so a bottom exit runs through the label. Set the sides explicitly with `exitX`/`exitY` and `entryX`/`entryY`: left-to-right flow uses `exitX=1;exitY=0.5` and `entryX=0;entryY=0.5`.
+- **An edge between rows routes through a gutter.** Leave a column of empty space to the right (or left) of every row and lane header, exit the source icon from that side, add two waypoints in the gutter (`<Array as="points">` inside the edge geometry), and enter the target icon from the same side. Lane headers stop short of the gutter so the edge never crosses them.
+- **Place an edge label on a straight segment that crosses nothing.** Draw.io puts the label at the midpoint of the whole path, which on a bent edge can land on a divider or a header. Move it along the path with the edge geometry's `x` (from -1 at the source to 1 at the target), for example `<mxGeometry x="0.5" relative="1" as="geometry">`.
 
 ## Common Layout Patterns
 
@@ -78,7 +82,7 @@ When a diagram has multiple distinct flows:
 
 1. **Single AWS Cloud group** spanning all flows (not one per flow)
 2. **Lane headers** with step-by-step summaries: `"① チケット取得 → ② データ保存 → ③ AI変換 → ④ 索引化"`
-3. **Dashed vertical divider** between lanes instead of separate colored blocks
+3. **Lanes stacked top to bottom**, each lane header directly above its own row of icons, with a **dashed horizontal divider** between lanes instead of separate colored blocks
 4. **Step-numbered edges** — use circled numbers (① ② ③ or ❶ ❷ ❸) on edges instead of technical labels
 5. Different number styles per flow for visual distinction (white circled vs black circled)
 
@@ -88,8 +92,9 @@ rounded=1;whiteSpace=wrap;fillColor=#DBEAFE;strokeColor=none;fontColor=#1E40AF;f
 ```
 
 ### Dashed divider style
+The divider is an edge between two points, and an edge draws an arrowhead by default, so the style turns both ends off:
 ```
-strokeColor=#94A3B8;strokeWidth=1;dashed=1;dashPattern=8 4;
+endArrow=none;startArrow=none;strokeColor=#94A3B8;strokeWidth=1;dashed=1;dashPattern=8 4;
 ```
 
 ## Managed Services and VPC Endpoints Layout
